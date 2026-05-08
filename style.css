@@ -82,3 +82,10 @@ button:hover{
 .delete-btn{
     background-color: #f56c6c;
 }
+
+#searchInput{
+    padding:8px;
+    margin-left:10px;
+    margin-right:10px;
+    width:200px;
+}

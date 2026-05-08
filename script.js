@@ -1,9 +1,11 @@
 const carList = [
     {
+        id:1,
         carNumber:"A12345",
         time:"10:00"
     },
     {
+        id:2,
         carNumber:"B88888",
         time:"11:00"
     }
@@ -11,18 +13,18 @@ const carList = [
 
 const tableBody = document.getElementById("carTableBody");
 
-function renderTable(){
+function renderTable(data = carList){
 
     tableBody.innerHTML = "";
 
-    carList.forEach((car, index) => {
+    data.forEach((car) => {
 
         tableBody.innerHTML += `
         <tr>
             <td>${car.carNumber}</td>
             <td>${car.time}</td>
             <td>
-                <button class="delete-btn" onclick="deleteCar(${index})">
+                <button class="delete-btn" onclick="deleteCar(${car.id})">
                     删除
                 </button>
             </td>
@@ -33,8 +35,10 @@ function renderTable(){
 
 renderTable();
 
-function deleteCar(index)
-{
+function deleteCar(id){
+
+    const index = carList.findIndex(car => car.id === id);
+
     carList.splice(index, 1);
 
     renderTable();
@@ -55,4 +59,17 @@ document.getElementById("addBtn").onclick = function(){
 
         renderTable();
     }
+}
+
+document.getElementById("searchBtn").onclick = function(){
+
+    const keyword = document.getElementById("searchInput").value;
+
+    const result = carList.filter(car => {
+
+        return car.carNumber.includes(keyword);
+
+    });
+
+    renderTable(result);
 }
